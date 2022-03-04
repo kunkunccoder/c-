@@ -1,0 +1,92 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+typedef struct DList DL;
+
+struct DList
+{
+    DL *prev;
+    DL *next;
+    int a;
+};
+
+void DListdestory(DL* head)
+{
+    DL* cur=head->next;
+    while(cur!=head)
+    {
+        DL* next=cur->next;
+        free(cur);
+        cur=next;
+    }
+    free(head);
+    head=NULL;
+}
+
+DL* Buyroom(int val)
+{
+    DL * newnode=(DL*)malloc(sizeof(DL));
+    newnode->prev=NULL;
+    newnode->next=NULL;
+    newnode->a=val;
+    return newnode;
+}
+
+DL* DListinit(void)
+{
+    DL *newnode=Buyroom(0);
+    newnode->prev=newnode;
+    newnode->next=newnode;
+    return newnode;
+}
+
+void DListerose(DL* head,DL* pos)
+{
+    DL* second=pos->prev;
+    second->next=pos->next;
+    pos->next->prev=second;
+}
+
+void DListinsert(DL* head,DL* pos,int val)
+{
+    DL *newnode=Buyroom(val);
+    DL *prev=pos->prev;
+    prev->next=newnode;
+    newnode->prev=prev;
+    newnode->next=pos;
+    pos->prev=newnode;
+}
+void DListprint(DL *head)
+{
+    DL* cur=head->next;
+    while(cur!=head)
+    {
+        printf("%d ",cur->a);
+        cur=cur->next;
+    }
+    printf("\n");
+}
+
+void test01(void)
+{
+    DL*head=DListinit();
+    DListinsert(head,head->next,1);
+    DListinsert(head,head,2);
+    DListinsert(head,head->next,3);
+    DListprint(head);
+    DListerose(head,head->next);
+    DListprint(head);
+    DListerose(head,head->prev);
+    DListprint(head);
+    DListinsert(head,head->next,4);
+    DListinsert(head,head->next,5);
+    DListprint(head);
+    DListdestory(head);
+}
+
+int main()
+{
+    test01();
+    return 0;
+}

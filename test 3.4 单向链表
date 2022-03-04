@@ -1,0 +1,198 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct SList SL;
+
+struct SList
+{
+    int a;
+    SL *next;
+};
+
+SL* Buyroom(int val)
+{
+    SL *newnode=(SL*)malloc(sizeof(SL));
+    newnode->next=NULL;
+    newnode->a=val;
+    return newnode;
+}
+
+void SListpopback(SL**head)
+{
+    SL *cur=*head;
+    SL *prev=NULL;
+    if(*head==NULL)
+    {
+        return;
+    }
+    else
+    {
+        while(cur->next!=NULL)
+        {
+            prev=cur;
+            cur=cur->next;
+        }
+        free(cur);
+        prev->next=NULL;
+    }
+}
+
+void SListpopfront(SL **head)
+{
+    if(*head==NULL)
+    {
+        return;
+    }
+    else if((*head)->next==NULL)
+    {
+        free(*head);
+        *head=NULL;
+    }
+    else
+    {
+        SL*cur=(*head)->next;
+        free(*head);
+        *head=cur;
+    }
+}
+
+SL* SListfind(SL **head,int val)
+{
+    SL *prev=NULL;
+    SL *cur=*head;
+    if(*head==NULL)
+    {
+        return NULL;
+    }
+    else
+    {
+        if((*head)->a==val)
+        {
+            return *head;
+        }
+        while(cur->a!=val)
+        {
+            prev=cur;
+            cur=cur->next;
+        }
+        if(cur!=NULL)
+        {
+            return cur;
+        }
+        else
+        {
+            return NULL;
+        }
+    }
+}
+
+void SListpushfront(SL**head,int val)
+{
+    SL*newnode=Buyroom(val);
+    if(*head==NULL)
+    {
+        *head=newnode;
+    }
+    else
+    {
+        newnode->next=*head;
+        *head=newnode;
+    }
+}
+
+void SListpushback(SL **head,int val)
+{
+    SL*newnode=Buyroom(val);
+    if(*head==NULL)
+    {
+        *head=newnode;
+        (*head)->a=val;
+    }
+    else
+    {
+        SL *cur=*head;
+        while(cur->next!=NULL)
+        {
+            cur=cur->next;
+        }
+        cur->next=newnode;
+        cur->next->a=val;
+    }
+}
+
+void SListinsert(SL **head,SL **pos,int val)
+{
+    SL *newnode=Buyroom(val);
+    SL *cur =*head;
+    SL *prev=NULL;
+    if(cur==*pos)
+    {
+        newnode->next=cur;
+        *head=newnode;
+    }
+    else
+    {
+        while(cur!=*pos)
+        {
+            prev=cur;
+            cur=cur->next;
+        }
+        prev->next=newnode;
+        newnode->next=cur;
+    }
+}
+
+void SListerase(SL **head,SL **pos)
+{
+    SL *cur=*head;
+    SL *prev=NULL;
+    if((*head)==(*pos))
+    {
+        *head=(*head)->next;
+    }
+    else
+    {
+        while(cur!=(*pos))
+        {
+            prev=cur;
+            cur=cur->next;
+        }
+        prev->next=cur->next;
+    }
+}
+
+void SListprint(SL*head)
+{
+    while(head!=NULL)
+    {
+        printf("%d ",head->a);
+        head=head->next;
+    }
+    printf("\n");
+}
+
+void test01(void)
+{
+    SL *head=NULL;
+    SListpushback(&head,1);
+    SListpushback(&head,2);
+    SListpushback(&head,3);
+    SListpushfront(&head,0);
+    SListpopback(&head);
+    SListpopfront(&head);
+    SL *pos=SListfind(&head,1);
+    if(pos!=NULL)
+    {
+        SListinsert(&head,&pos,20);
+    }
+    SListprint(head);
+    pos=SListfind(&head,1);
+    SListerase(&head,&pos);
+    SListprint(head);
+}
+
+int main()
+{
+    test01();
+    return 0;
+}

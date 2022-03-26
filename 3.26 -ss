@@ -1,0 +1,103 @@
+#include <stdio.h>
+
+char * my_strstr(char *p1,char *p2)
+{
+    char *p3=p2;
+    int i=0;
+    while(*p1)
+    {
+        for(i=0;;i++)
+        {
+            if(*(p1+i)!=*(p2+i))
+            {
+                break;
+            }
+            if(*(p2+i)=='\0')
+            {
+                return p3;
+            }
+        }
+        p2=p3;
+        p1++;
+    }
+    return NULL;
+}
+
+int main()
+{
+    char arr[20]="abcdef";
+    char brr[]="def";
+    char *p=my_strstr(arr,brr);
+    printf("%s\n",p);
+    
+    
+    
+    return 0;
+}
+#include <stdio.h>
+
+void my_strcat(char *p1,char *p2)
+{
+    while(*p1++);
+    p1--;
+    while(*p1++=*p2++);
+}
+
+int main()
+{
+    char arr[20]="abc";
+    char brr[]="def";
+    my_strcat(arr,brr);
+    printf("%s\n",arr);
+    
+    return 0;
+}
+#include <stdio.h>
+
+
+int my_strcmp(char *p1,char *p2)
+{
+    while(*p1++==*p2++);
+    if(*p1>*p2)
+    {
+        return 1;
+    }
+    else if(*p1<*p2)
+    {
+        return -1;
+    }
+    else
+    {
+        return 0;
+    }
+    
+}
+
+int main()
+{
+    char arr[]="abcdef";
+    char brr[]="bcdefg";
+    int a=my_strcmp(arr,brr);
+    printf("%d\n",a);
+    
+    
+    return 0;
+}
+#include <stdio.h>
+
+
+void my_strcpy(char *p1,char *p2)
+{
+    while((*p1++=*p2++));
+}
+
+int main()
+{
+    char arr[]="abcdef";
+    char brr[20];
+    my_strcpy(brr,arr);
+    printf("%s\n",brr);
+    
+    
+    return 0;
+}

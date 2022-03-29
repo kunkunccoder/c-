@@ -1,0 +1,36 @@
+vector<string> v={{""},{""},{"abc"},{"def"},{"ghi"},{"jkl"},{"mno"},{"pqrs"},{"tuv"},{"wxyz"}};
+
+
+class Solution {
+public:
+    
+    void getthing(vector<string>& a,string& digits,int x,string s)
+    {
+        if(x==digits.length())
+        {
+            a.push_back(s);
+        }
+        else
+        {
+            char c=digits[x];
+            int r=c-'0';
+            string z=v[r];
+            for(char& e:z)
+            {
+                getthing(a,digits,x+1,s+e);
+            }
+        }
+    }
+    vector<string> letterCombinations(string digits) {
+        vector<string> a;
+        if(digits.empty())
+        {
+            return a;
+        }
+        string s;
+        getthing(a,digits,0,s);
+        return a;
+        
+    }
+    
+};

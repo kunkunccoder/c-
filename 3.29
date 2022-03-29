@@ -1,0 +1,91 @@
+#include <iostream>
+using namespace std;
+
+
+int run(int n,int m,int i,int j)
+{
+    if(i==n+1||j==m+1)
+    {
+        return 0;
+    }
+    else if(i==n&&j==m)
+    {
+        return 1;
+    }
+    return run(n,m,i+1,j)+run(n,m,i,j+1);
+}
+
+
+int main()
+{
+    int n=0;
+    int m=0;
+    cin>>n>>m;
+    int count=0;
+    count=run(n,m,0,0);
+    cout<<count<<endl;
+    return 0;
+}
+
+
+
+#include <iostream>
+using namespace std;
+#include <string>
+#include <vector>
+
+int main()
+{
+    int n=0;
+    string s;
+    cin>>n;
+    vector<string> v;
+    int i=0;
+    for(i=0;i<n;i++)
+    {
+        string s;
+        cin>>s;
+        v.push_back(s);
+    }
+    int a=1;
+    int b=1;
+    int j=0;
+    for(i=0;i<n-1;i++)
+    {
+        for(j=0;j<v[i].size();j++)
+        {
+            if(v[i][j]<=v[i+1][j])
+            {
+                a=1;
+                break;
+            }
+            else 
+            {
+                a=0;
+                break;
+            }
+        }
+        if(v[i].size()>v[i+1].size())
+        {
+            b=0;
+        }
+    }
+    if(a==1&&b==1)
+    {
+        cout<<"both"<<endl;
+    }
+    else if(a==1&&b==0)
+    {
+        cout<<"lexicographically"<<endl;
+    }
+    else if(a==0&&b==1)
+    {
+        cout<<"lengths"<<endl;
+    }
+    else 
+    {
+        cout<<"none"<<endl;
+    }
+}
+
+

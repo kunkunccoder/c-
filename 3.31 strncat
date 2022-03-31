@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+void my_strncat(char *p1,char *p2,int n)
+{
+    while(*p1)
+    {
+        p1++;
+    }
+    int i=0;
+    for(i=0;i<n;i++)
+    {
+        *p1++=*p2++;
+    }
+}
+
+
+int main()
+{
+    char arr[10]="abcd";
+    char brr[10]="efg";
+    my_strncat(arr,brr,3);
+    printf("%s\n",arr);
+    return 0;
+}

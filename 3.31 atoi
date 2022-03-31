@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int my_atoi(char * p)
+{
+    int a=0;
+    int flag=1;
+    while(*p==' ')
+    {
+        p++;
+    }
+    if(*p=='-')
+    {
+        flag=-1;
+        p++;
+    }
+    else if(*p=='+')
+    {
+        flag=1;
+        p++;
+    }
+    while(*p>='0'&&*p<='9')
+    {
+        if(a>2147483647)
+        {
+            return 0;
+        }
+        a=a*10+*p-'0';
+        p++;
+        
+    }
+    return a*flag;
+}
+
+
+int main()
+{
+    char arr[10]="   -1234";
+    int a=my_atoi(arr);
+    printf("%d\n",a);
+    
+    
+    return 0;
+}

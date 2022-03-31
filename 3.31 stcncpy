@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+void my_strncpy(char *p1,char *p2,int n)
+{
+    while(n--)
+    {
+        *p1++=*p2++;
+    }
+}
+
+
+int main()
+{
+    char arr[10]="abcd";
+    char brr[10]="efg";
+    my_strncpy(arr,brr,2);
+    printf("%s\n",arr);
+    
+    return 0;
+}

@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+#include <algorithm>
+#include <vector>
+
+int main()
+{
+    int i=0;
+    vector<int> v;
+    for(i=0;i<10;i++)
+    {
+        int x=0;
+        cin>>x;
+        v.push_back(x);
+    }
+    sort(v.begin(),v.end());
+    vector<int> vx;
+    for(i=0;i<9;)
+    {
+        if(v[i]==v[i+1])
+        {
+            i+=2;
+        }
+        else
+        {
+            vx.push_back(v[i]);
+            i++;
+        }
+    }
+    if(i%2==1)
+    {
+        vx.push_back(v[i]);
+    }
+    for(i=0;i<vx.size();i++)
+    {
+        printf("%d ",vx[i]);
+    }
+    return 0;
+}

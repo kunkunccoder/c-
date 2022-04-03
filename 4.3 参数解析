@@ -1,0 +1,66 @@
+#include <iostream>
+using namespace std;
+#include <string>
+#include <vector>
+
+int main()
+{
+    string s;
+    getline(cin,s);
+    if(s.empty())
+    {
+        cout<<0<<endl;
+    }
+    int i=0;
+    int count=0;
+    vector<string> v;
+    string x;
+    for(i=0;i<s.size();i++)
+    {
+        //x+=s[i];
+        if(s[i]==' ')
+        {
+            if(x.empty())
+            {
+                ;
+            }
+            else 
+            {
+                v.push_back(x);
+            }
+            string y;
+            x=y;
+            while(s[i]==' ')
+            {
+                i++;
+            }
+            count++;
+            i--;
+        }
+        else if(s[i]=='"')
+        {
+            i++;
+            string vx;
+            while(s[i]!='"')
+            {
+                
+                vx+=s[i];
+                i++;
+            }
+            
+            v.push_back(vx);
+        }
+        else 
+        {
+            x+=s[i];
+        }
+    }
+    v.push_back(x);
+    count++;
+    cout<<count<<endl;
+    for(i=0;i<v.size();i++)
+    {
+        cout<<v[i]<<endl;
+    }
+    return 0;
+}

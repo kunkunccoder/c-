@@ -1,0 +1,32 @@
+class Solution {
+public:
+    char nextGreatestLetter(vector<char>& letters, char target) {
+        char b=target;
+        int i=0;
+        char c=letters[0];
+        for(i=0;i<letters.size();i++)
+        {
+            if(letters[i]>b)
+            {
+                b=letters[i];
+            }
+            if(c>letters[i])
+            {
+                c=letters[i];
+            }
+        }
+        if(b<=target)
+        {
+            return c;
+        }
+        for(i=0;i<letters.size();i++)
+        {
+            if(b>letters[i]&&letters[i]>target)
+            {
+                b=letters[i];
+            }
+            
+        }
+        return b;
+    }
+};

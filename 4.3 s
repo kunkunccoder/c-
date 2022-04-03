@@ -1,0 +1,66 @@
+#include <iostream>
+using namespace std;
+#include <vector>
+#include <cstring>
+#include <cmath>
+
+int main()
+{
+    int n=0;
+    int m=0;
+    cin>>n>>m;
+    int i=0;
+    vector<int> arr;
+    for(int z=0;z<=m+1;z++)
+    {
+        arr.push_back(0);
+    }
+    arr[n]=1;
+    int j=0;
+    int x=0;
+    for(j=n;j<m;j++)
+    {
+        vector<int> v;
+        if(arr[j]==0)
+        {
+            continue;
+        }
+        int y=(int)sqrt((double)j);
+        for(i=2;i<=y;++i)
+        {
+            if(j%i==0)
+            {
+                v.push_back(i);
+                if(j/i!=i)
+                {
+                    v.push_back(j/i);
+                }
+            }
+        }
+        for(x=0;x<v.size();x++)
+        {
+            if(j+v[x]<=m)
+            {
+                
+                if(arr[j+v[x]]!=0)
+                {
+                    arr[j+v[x]]=min(arr[j]+1,arr[j+v[x]]);
+                }
+                else 
+                {
+                    arr[j+v[x]]=arr[j]+1;
+                }
+            }
+        }
+        
+    }
+    if(arr[m]==0)
+    {
+        cout<<-1<<endl;
+    }
+    else 
+    {
+        cout<<arr[m]-1<<endl;
+    }
+    return 0;
+}

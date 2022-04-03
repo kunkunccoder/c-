@@ -1,0 +1,37 @@
+class Solution {
+public:
+    void getnum(vector<string>& v,int i,int j,int n,string s)
+    {
+        if(i<n&&j<i)
+        {
+            s+='(';
+            getnum(v,i+1,j,n,s);
+
+            s[s.size()-1]=')';
+            getnum(v,i,j+1,n,s);
+        }
+        else if(i<n&&j==i)
+        {
+            s+='(';
+            getnum(v,i+1,j,n,s);
+        }
+        else if(i==n&&j<n)
+        {
+            s+=')';
+            getnum(v,i,j+1,n,s);
+        }
+        else if(i==n&&j==n)
+        {
+            v.push_back(s);
+        }
+    }
+
+    vector<string> generateParenthesis(int n) {
+        int i=0;
+        int j=0;
+        vector<string> v;
+        string s;
+        getnum(v,i,j,n,s);
+        return v;
+    }
+};

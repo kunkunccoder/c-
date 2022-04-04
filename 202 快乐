@@ -1,0 +1,32 @@
+class Solution {
+    public:
+    int Myfunc(int n)
+    {
+        int sum=0;
+        int num=0;
+        while(n>0)
+        {
+            num=n%10;
+            sum+=num*num;
+            n=n/10;     
+        }
+        return sum;
+    }
+public:
+    bool isHappy(int n) {
+        int sum=Myfunc(n);
+        set<int> s;//用来判断是否重复
+        while(s.find(sum)==s.end())
+        {
+            s.insert(sum);
+            if(sum==1)
+            break;
+            else
+            sum=Myfunc(sum);
+        }
+        if(sum==1)
+        return true;
+        else
+        return false;
+    }
+};

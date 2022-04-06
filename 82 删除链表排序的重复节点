@@ -1,0 +1,90 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if(head==nullptr||head->next==nullptr)
+        {
+            return head;
+        }
+        vector<int> v;
+        ListNode* n=head;
+        ListNode* n1=head->next;
+        if(n1->val==head->val)
+        {
+            v.push_back(1);
+        }
+        else 
+        {
+            v.push_back(0);
+        }
+        while(n1&&n1->next)
+        {
+            if((n1->val==(n1->next)->val)||(n1->val==n->val))
+            {
+                v.push_back(1);
+                n=n->next;
+                n1=n1->next;
+            }
+            else 
+            {
+                v.push_back(0);
+                n=n->next;
+                n1=n1->next;
+            }
+        }
+        if(n->val==n1->val)
+        {
+            v.push_back(1);
+        }
+        else 
+        {
+            v.push_back(0);
+        }
+        int i=0;
+        while(v[i]==1)
+        {
+            i++;
+            if(head->next==nullptr)
+            {
+                return nullptr;
+            }
+            head=head->next;
+        }
+        i++;
+        n=head;
+        n1=n->next;
+        for(;i<v.size();i++)
+        {
+            if(v[i]==0)
+            {
+                if(n1==n->next)
+                {
+                    n=n->next;
+                    n1=n1->next;
+                }
+                else
+                {
+                    n->next=n1;
+                    n=n1;
+                    n1=n1->next;
+                }
+            }
+            else if(v[i]==1)
+            {
+                n1=n1->next;
+            }
+        }
+        n->next=n1;
+        
+        return head;
+    }
+};
